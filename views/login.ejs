@@ -1,0 +1,134 @@
+<% layout('./layouts/boilerplate.ejs') %>
+
+<style>
+  .login_main {
+    height: 80vh;
+    width: 100%;
+    padding: 5rem;
+  }
+  .login_container {
+    width: 100%;
+    margin: auto;
+    padding: 36px 48px 48px 48px;
+    border-radius: 11px;
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+    display: flex;
+    gap: 2rem;
+    border-radius: 25px;
+    background-color: #484848;
+  }
+  .login-title {
+    padding: 15px;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .login-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+  }
+  .login-form label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  .login-form input {
+    width: 100%;
+    padding: 1.2rem;
+    border-radius: 9px;
+    border: none;
+  }
+
+  .login-form input:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(253, 242, 233, 0.5);
+  }
+
+  .btnn--form {
+    background-color: #ea2085;
+    color: #fdf2e9;
+    align-self: end;
+    padding: 8px;
+  }
+  .left{
+    width: 50%;
+    height: 20rem;
+    object-fit: cover;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .left>img
+  {
+    height: 100%;
+  }
+  .btnn,
+  .btnn:link,
+  .btnn:visited {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 9px;
+    border: none;
+
+    cursor: pointer;
+    font-family: inherit;
+
+    transition: all 0.3s;
+  }
+
+  button {
+    outline: 1px solid #ea2085;
+  }
+
+  .btnn--form:hover {
+    background-color: #fdf2e9;
+    color: #ea2085;
+  }
+  .right
+  {
+    display:  flex;
+    flex-direction: column;
+  }
+</style>
+<div class="login_main">
+  <div class="login_container">
+    <div class="left">
+      <img src="https://img.freepik.com/premium-vector/two-factor-autentication-security-illustration-login-confirmation-notification-with-password-code-message-smartphone-mobile-phone-app-account-shield-key-icons-isolated_167715-3211.jpg?size=626&ext=jpg&ga=GA1.1.1839061485.1721106252&semt=sph" alt="">
+    </div>
+    <div class="right">
+    <h2 class="login-title">Login </h2>
+
+    <form class="login-form" method="post">
+      <div>
+        <label for="email">Email </label>
+        <input
+          id="email"
+          type="text"
+          placeholder="me@example.com"
+          name="username"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="password">Password </label>
+        <input
+          id="password"
+          type="password"
+          placeholder="password"
+          name="password"
+          required
+        />
+      </div>
+
+      <button class="btnn btnn--form" type="submit" value="Log in">Log in</button>
+      <a href="/forget">Forgot Password</a>
+      <p>Doesnot Have Account? <a href="/signup">signup</a></p>
+    </form>
+    </div>
+  </div>
+</div>
+<!-- </form> -->

@@ -1,0 +1,19 @@
+<nav class="navbar">
+  <div class="logo">
+     <img src="/Assets_copy/photo_2024-06-19_15-47-45-removebg-preview.png" class="lg" >
+  </div>
+  <div class="menu">
+    <% if(currUser) {%>
+      <div class="auth-buttons">
+          <a href="/login" class="btn">My batch</a>
+          <a href="/logout" class="btn">Logout</a>
+        </div>
+        <% } %>
+        <% if(!currUser){ %>
+          <div class="auth-buttons">
+            <a href="/login" class="btn">Login</a>
+          </div>
+          <% } %>
+      </div>
+  </div>
+</nav>

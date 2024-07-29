@@ -1,0 +1,67 @@
+<% layout("./layouts/boilerplate") %>
+
+    <section class="hero">
+        <div class="hero-left">
+            <h1>C<span>o</span>de<span>Rank</span></h1>
+            <p class="tagline">Rank Up Your Code Skills</p>
+            <a href="" class="explore-btn">Explore More Courses</a>
+        </div>
+        <div class="hero-right">
+            <img src="https://i.pinimg.com/originals/7e/b2/49/7eb249f2fd2e58e9ad6dd60ef892971b.gif" alt="Teacher" class="img">
+        </div>
+    </section>
+    <section id="courses">
+        <h2>Featured Courses</h2>
+        <div class="courses-container">
+            <% for(let course of allCourses){ %>
+            <div class="course-card">
+                <div class="course-imgs">
+                    <img src="<%= course.image %>" alt="Web Development">
+                </div>
+                <div class="course-info">
+                    <h3 class="ht"><%= course.title %></h3>
+                    <p class="discounted-price">&#x20B9;<%= course.price %></p>
+                    <p class="price">&#x20B9;<%= course.discounted_price %></p>
+                    <a href="/<%= course.id %>/details" class="buy-now">Explore More</a>
+                </div>
+            </div>
+            <% } %>
+            </div>
+    <section class="featured">
+        <h2>Thousands of students achieved their dream job at</h2>
+        <div class="slider">
+            <div class="slide-track">
+                <div class="slide">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" class="company-logo">
+                </div>
+                <div class="slide">
+                    <img src="/Assets_copy/amazon-logo-1024x683-removebg-preview.png" alt="Amazon" class="company-logo amazon">
+                </div>
+                <div class="slide">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="company-logo">
+                </div>
+                <div class="slide">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" class="company-logo">
+                </div>
+                <div class="slide">
+                    <img src="https://www.svgrepo.com/show/354109/netflix-icon.svg" alt="Netflix" class="company-logo">
+                </div>
+                <div class="slide">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" class="company-logo">
+                </div>
+                <div class="slide">
+                    <img src="/Assets_copy/amazon-logo-1024x683-removebg-preview.png" alt="Amazon" class="company-logo amazon">
+                </div>
+                <div class="slide">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="company-logo">
+                </div>
+                <div class="slide">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" class="company-logo">
+                </div>
+                <div class="slide">
+                    <img src="https://www.svgrepo.com/show/354109/netflix-icon.svg" alt="Netflix" class="company-logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
