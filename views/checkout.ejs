@@ -1,8 +1,5 @@
 <% layout('./layouts/boilerplate.ejs') %>
-
 <style>
-  /* Add your custom styles here */
-  /* Example styles */
   .payment-container {
     max-width: 600px;
     margin: 50px auto 50px auto;
@@ -12,24 +9,24 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-
+  
   .payment-title {
     font-size: 24px;
     margin-bottom: 20px;
     color: #333;
   }
-
+  
   .payment-form {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-
+  
   .form-input {
     margin-bottom: 20px;
     width: 100%;
   }
-
+  
   .form-label {
     font-weight: bold;
     color: #333;
@@ -37,7 +34,7 @@
     display: block;
     text-align: left;
   }
-
+  
   .form-input input[type="text"],
   .form-input input[type="number"] {
     width: calc(100% - 20px);
@@ -47,7 +44,7 @@
     font-size: 16px;
     box-sizing: border-box;
   }
-
+  
   .form-submit-button {
     background-color: #6d0ea8;
     color: white;
@@ -58,12 +55,13 @@
     transition: background-color 0.3s ease;
     font-size: 16px;
   }
-
+  
   .form-submit-button:hover {
     background-color: #2e64d1;
   }
+  
+  
 </style>
-
 <div class="payment-container">
   <h1 class="payment-title">Payment Checkout</h1>
   <form class="payment-form" action="/payment/process" method="post">

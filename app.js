@@ -11,22 +11,16 @@ const CouponRouter = require("./Routes/Coupons.js");
 const AdminRouter=require('./Routes/admin.js');
 const { DateTime } = require("luxon");
 const flash = require("connect-flash");
-const Coupons = require("./Models/Coupon.js");
-const Courses = require("./Models/course_listing.js");
 const User = require("./Models/User.js");
 const passport = require("passport");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
-const checksum_lib = require("./Routes/Paytm/checksum.js");
-const config = require("./Routes/Paytm/config.js");
 const LocalStrategy=require('passport-local');
 const session=require('express-session');
 const userRouter=require('./Routes/user.js');
-
 // const PaytmChecksum = require("./PaytmChecksum");
-// const PaytmChecksum = require("paytmchecksum");
 app.use(express.static("./assets"));
 app.use(
   "/assets",
@@ -56,10 +50,11 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+app.use(flash());
 
 app.use((req, res, next) => {
-  // res.locals.success = req.flash("success");
-  // res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
   res.locals.currUser = req.user;
   next();
 });
@@ -98,100 +93,15 @@ main()
 async function main() {
   await mongoose.connect(MONGO_URL);
 }
-app.use(flash());
+
 //Routing 
 app.use("/admin",CourseRouter,CouponRouter ,AdminRouter);
 app.use("/", clientRouter);
 app.use("/",userRouter);
 
-app.get("/:id/details", async (req, res) => {
-  let { id } = req.params;
-  const Course = await Courses.findById(id);
-  const discountedPrice = Course.discounted_price;
-  res.cookie("discountedPrice", discountedPrice, {
-    maxAge: 24 * 60 * 60 * 1000,
-  });
-  let couponName = NaN;
-  res.render("Client_next.ejs", { Course, discountedPrice, couponName });
-});
 
-app.post("/:id/details", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const Course = await Courses.findById(id);
-    const couponName = req.body.Coupon;
-    const checkcoup = await Coupons.findOne({ Name: couponName });
 
-    if (couponName) {
-      if (checkcoup) {
-        if (checkcoup.coupon_valid_from > Date.now()) {
-          req.flash("error", "Your Coupon can not be accessed");
-          return res.redirect(`/${id}/details`);
-        }
-        if (checkcoup.Coupon_qty <= 0) {
-          req.flash("error", "Your Coupon has been exhausted");
-          return res.redirect(`/${id}/details`);
-        }
 
-        const expiryDate = DateTime.fromJSDate(checkcoup.coupon_valid);
-        const today = DateTime.now();
-
-        if (expiryDate <= today) {
-          req.flash("error", "Coupon has Expired");
-          return res.redirect(`/${id}/details`);
-        }
-
-        if (!checkcoup.course.includes(id)) {
-          req.flash("error", "Your Coupon is not Associated With this Course");
-          return res.redirect(`/${id}/details`);
-        }
-      }
-
-      const Coupon = await Coupons.findOne({ Name: couponName });
-      if (!Coupon) {
-        req.flash("error", "Invalid Coupon Name");
-        return res.redirect(`/${id}/details`);
-      }
-
-      const discountedPrice =
-        (1 - Coupon.Discount / 100) * Course.discounted_price;
-
-      res.cookie("coupon", couponName, { maxAge: 24 * 60 * 60 * 1000 });
-      res.cookie("discountedPrice", discountedPrice, {
-        maxAge: 24 * 60 * 60 * 1000,
-      });
-
-      return res.render("Client_next.ejs", {
-        Course,
-        discountedPrice, // Pass discountedPrice
-        couponName,
-        error: null, // Pass null for error
-      });
-    } else {
-      const discountedPrice = Course.discounted_price;
-
-      res.cookie("coupon", couponName, { maxAge: 24 * 60 * 60 * 1000 });
-      res.cookie("discountedPrice", discountedPrice, {
-        maxAge: 24 * 60 * 60 * 1000,
-      });
-
-      return res.render("Client_next.ejs", {
-        Course,
-        discountedPrice, // Pass discountedPrice
-        couponName,
-        error: null, // Pass null for error
-      });
-    }
-  } catch (error) {
-    console.error("Error applying coupon:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-app.post("/:id/details/payment", (req, res) => {
-  res.render("checkout.ejs");
-  
-});
 
 // app.post("/:id/details/payment", async (req, res) => {
 //   try {
