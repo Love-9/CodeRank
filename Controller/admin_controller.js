@@ -2,7 +2,7 @@ const Admin=require('../Models/admin');
 const Courses=require('../Models/course_listing');
 
 module.exports.index=async (req, res) => {
-    const admin = await Admin.findOne();
+    const admin = await Admin.findOne({});
     res.render("dashboard.ejs", { admin });
 }
 

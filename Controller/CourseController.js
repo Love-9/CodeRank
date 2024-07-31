@@ -17,28 +17,9 @@ module.exports.CreateCourse = async (req, res) => {
     const newCourse = new Courses(req.body.courses);
     let savedCourse = await newCourse.save();
     console.log(savedCourse);
-
-    // Retrieve the Admin document
     let admin = await Admin.findOne();
-
-    // Check if the admin document is found
-    if (!admin) {
-      // If no Admin document is found, create one
-      admin = new Admin();
-      await admin.save();
-    }
-
-    // Ensure the courses array exists on the Admin document
-    if (!admin.courses) {
-      admin.courses = [];
-    }
-
-    // Update the Admin's courses array
     admin.courses.push(savedCourse._id);
-
-    // Save the updated Admin document
     await admin.save();
-
     res.redirect("/admin");
   } catch (err) {
     // Handle error

@@ -29,13 +29,13 @@ module.exports.createCoupon = async (req, res) => {
       let savedCoupon = await newCoupon.save();
 
       // Retrieve the Admin document
-      // let admin = await Admin.findOne();
+      let admin = await Admin.findOne();
 
-      // // Update the Admin's coupons array
-      // admin.coupons.push(savedCoupon._id);
+      // Update the Admin's coupons array
+      admin.coupons.push(savedCoupon._id);
 
-      // // Save the updated Admin document
-      // await admin.save();
+      // Save the updated Admin document
+      await admin.save();
 
       res.redirect("/admin");
     } else {

@@ -9,7 +9,7 @@ router.get("/:id/details", clientCourse.getDetails);
   
 router.post("/:id/details", clientCourse.submitForm);
 
- router.post("/:id/details/payment", clientCourse.renderPaymentPage);
+router.post("/:id/details/payment", clientCourse.renderPaymentPage);
   
 
 

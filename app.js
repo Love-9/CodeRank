@@ -230,7 +230,6 @@ app.get("/sendmail",(req,res)=>{
 
 )
 
-
 // function generateUniqueOrderId() {
 //   const timestamp = Date.now(); // Current timestamp in milliseconds
 //   const randomPart = Math.floor(Math.random() * 1000000); // Random number between 0 and 999999

@@ -11,6 +11,7 @@ module.exports.signUp=async(req,res)=>{
     let{username,email,password}=req.body;
     const newUser=new User({email,username});
     await User.register(newUser,password);
+    res.redirect("/");
 }
 
 module.exports.logOut=(req, res) => {

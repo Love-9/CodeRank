@@ -2,6 +2,7 @@ const express=require('express');
 const router=express.Router();
 const passport=require('passport');
 const userController=require('../Controller/user_controller.js');
+
 router.get("/login", userController.renderLogin);
 router.get("/signup",userController.renderSignup);
 router.post("/signup",userController.signUp);
@@ -21,6 +22,6 @@ router.post('/login', (req, res, next) => {
       });
     })(req, res, next);
   });
-  
+
 router.get("/logout", userController.logOut);
 module.exports=router;
